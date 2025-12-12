@@ -1,0 +1,79 @@
+def hitung_ongkir (jarak_km,berat_kg):
+    # --- Konstanta Tarif ---
+    biaya_dasar = 10000
+    biaya_per_km = 3000
+    biaya_per_kg = 2000
+
+    # --- Perhitungan Untuk ongkir ---
+    biaya_jarak = biaya_per_km * jarak_km
+    biaya_berat = biaya_per_kg * berat_kg
+    total_ongkir = biaya_jarak + biaya_berat + biaya_dasar
+
+    return total_ongkir
+
+def estimasi_waktu(jarak_km):
+  if jarak_km <50:
+    return "1 hari"
+  elif 50 <= jarak_km  <= 100:
+    return "2 hari"
+  else:
+    return"3-7 hari"
+
+def sistem_cek_tarif_ongkir():
+  print("=====Cek Tarif Ongkir=====")
+
+  while True:
+    try:
+      harga_barang= int(input("Masukkan Harga Barangg Rp:"))
+      if harga_barang <= 0 :
+        print("Erorr:Harga barang tidak boleh 0")
+        continue
+
+      jarak_input = float(input("Masukkan jarak pengiriman barang (km):"))
+      if jarak_input <= 0:
+        print("Erorr:Jarak pengiriman barang harus lebih dari 0")
+        continue
+
+      berat_input =float(input("Masukkan Berat barang (kg):"))
+      if berat_input <= 0:
+        print("Erorr:Berat Barang harus lebih dari 0")
+        continue
+
+
+      break
+
+    except ValueError:
+      print("Erorr:input harus angka yang valid ")
+      next_action = input("Coba lagi? (y/n)").lower()
+      if next_action == "n":
+        print("Program Selesai")
+        return
+
+  total_ongkir = hitung_ongkir(jarak_input, berat_input)
+
+  #Harga akhir
+  harga_akhir = harga_barang + total_ongkir
+
+  #Estimasi waktu
+  waktu_pengiriman = estimasi_waktu(jarak_input)
+
+  #Outpu hasil
+  print("="*70)
+  print("\n")
+  print("Hasil perhitungan :")
+  print(f"Harga Barang     : Rp {harga_barang}")
+  print(f"Jarak Pengiriman : {jarak_input} km")
+  print(f"Berat Barang     : {berat_input} kg")
+  print("="*70)
+  print(f"Ongkos Kirim     : Rp {total_ongkir}")
+  print(f"Harga Akhir      : Rp {harga_akhir}")
+  print(f"Waktu Pengiriman : {waktu_pengiriman}")
+
+# --- Jalankan Sistem ---
+sistem_cek_tarif_ongkir()
+print("\n")
+mau_lagi = input("Coba Lagi? (y/n)").lower()
+if mau_lagi == "y":
+  sistem_cek_tarif_ongkir()
+else:
+  print("Program Selesai")
